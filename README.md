@@ -9,6 +9,17 @@ Vuex is a state management pattern + library for Vue.js applications. It serves 
 ## Documentation
 You can find out more info how to configure your app here: https://vuex.vuejs.org/installation.html
 
+### Basic structure:
+<code>store.js</code>
+```javascript
+export default new Vuex.Store({
+    state:{}, //data
+    getters:{}, // like computed
+    mutations:{}, // change data/state
+    actions:{}, //like method (changing data/state is not recommended)
+})
+```
+
 ## Installation
 For Installation I would recommend using vue ui:
 
