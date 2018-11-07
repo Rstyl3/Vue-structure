@@ -12,23 +12,26 @@
     <hr>
     <TeamComponent type='A'>Team A</TeamComponent>
     <TeamComponent type='B'>Team B</TeamComponent>
+    <InfoComponent></InfoComponent>
   </div>
 </template>
 
 <script>
+import InfoComponent from './InfoComponent.vue'
 import TeamComponent from './TeamComponent.vue'
 import { mapState, mapActions, mapGetters } from 'vuex'
 
 export default {
   components: {
     TeamComponent,
+    InfoComponent,
   },
   computed: {
     ...mapState(['students']),
-    ...mapGetters(['studentCount'])
+    ...mapGetters(['studentCount']),
   },
   methods: {
-    ...mapActions(['addTeamMember'])
+    ...mapActions(['addTeamMember']),
   },
   //get data when component is created
   created() {

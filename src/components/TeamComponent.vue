@@ -18,7 +18,7 @@ export default {
   computed: {
     team() {
       //Get data from store
-      return this.type == 'A' ? this.$store.state.teamA : this.$store.state.teamB
+      return this.type === 'A' ? this.$store.state.teamA : this.$store.state.teamB
     },
   },
   methods:{
