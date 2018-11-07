@@ -1,36 +1,34 @@
 <template>
   <div>
-    <h1>Students</h1>
+    <h1>Students - Total is {{studentCount}}</h1>
     <ul>
       <li v-for="(student,index) in students" :key="student.id">
         {{student.name}}
         <i>{{student.games.length}} games he plays</i>
-        <button :disabled="student.selected" @click="addTeamMember('A', index)">Team A</button>
-        <button :disabled="student.selected" @click="addTeamMember('B', index)">Team B</button>
+        <button :disabled="student.selected" @click="addTeamMember({type:'A', index})">Team A</button>
+        <button :disabled="student.selected" @click="addTeamMember({type:'B', index})">Team B</button>
       </li>
     </ul>
-  <hr>
-  <TeamComponent type='A'>Team A</TeamComponent>
-  <TeamComponent type='B'>Team B</TeamComponent>
+    <hr>
+    <TeamComponent type='A'>Team A</TeamComponent>
+    <TeamComponent type='B'>Team B</TeamComponent>
   </div>
 </template>
 
 <script>
-import TeamComponent from './TeamComponent.vue' 
+import TeamComponent from './TeamComponent.vue'
+import { mapState, mapActions, mapGetters } from 'vuex'
 
 export default {
-  components:{
-    TeamComponent
+  components: {
+    TeamComponent,
   },
-  computed:{
-    students(){
-      return this.$store.state.students
-    }
+  computed: {
+    ...mapState(['students']),
+    ...mapGetters(['studentCount'])
   },
-  methods:{
-    addTeamMember(type, index){
-     this.$store.dispatch('addTeamMember',{type, index})
-    }
+  methods: {
+    ...mapActions(['addTeamMember'])
   },
   //get data when component is created
   created() {
@@ -41,13 +39,13 @@ export default {
 </script>
 
 <style>
-ul{
+ul {
   list-style: none;
 }
 ul li {
   padding: 5px;
 }
-button{
- margin-left: 5px; 
+button {
+  margin-left: 5px;
 }
 </style>

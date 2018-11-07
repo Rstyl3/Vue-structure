@@ -11,7 +11,9 @@ export default new Vuex.Store({
     teamB: []
   },
   getters: { //computed properties
-
+    studentCount(state) {
+      return state.students.length
+    }
   },
   mutations: { //Used for changing data
     //state = access like this.
@@ -22,14 +24,15 @@ export default new Vuex.Store({
       data.type === 'A' ? state.teamA.push(state.students[data.index]) : state.teamB.push(state.students[data.index])
     },
     enableSelectState(state, data) { //enable button
-      state.students.forEach((student) =>{
-        student.id === data.member.id ? student.selected = false : ''
-      }) 
+      // state.students.forEach((student) =>{
+      //   student.id === data.member.id ? student.selected = false : ''
+      // }) 
+      state.students[data.member.id - 1].selected = false
     },
     disableSelectState(state, index) { //disable button
       state.students[index].selected = true
     },
-    spliceFromTeam(state, data){
+    spliceFromTeam(state, data) {
       data.type === 'A' ? state.teamA.splice(data.index) : state.teamB.splice(data.index)
     }
 
@@ -43,7 +46,7 @@ export default new Vuex.Store({
       context.commit('addMemberToTeam', data)
       context.commit('disableSelectState', data.index)
     },
-    removeFromTeam(context,data){
+    removeFromTeam(context, data) {
       context.commit('enableSelectState', data)
       context.commit('spliceFromTeam', data)
     }
