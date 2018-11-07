@@ -17,7 +17,6 @@
 
 <script>
 import TeamComponent from './TeamComponent.vue' 
-import store from '../store/index'
 
 export default {
   components:{
@@ -25,18 +24,18 @@ export default {
   },
   computed:{
     students(){
-      return store.state.students
+      return this.$store.state.students
     }
   },
   methods:{
     addTeamMember(type, index){
-     store.dispatch('addTeamMember',{type, index})
+     this.$store.dispatch('addTeamMember',{type, index})
     }
   },
   //get data when component is created
   created() {
     //dispatch to call actions
-    store.dispatch('getStudents')
+    this.$store.dispatch('getStudents')
   },
 }
 </script>
